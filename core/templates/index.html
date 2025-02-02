@@ -1,0 +1,462 @@
+{% load static %} 
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   {% block title %}<title>Online Rental Marketplace</title>
+   {% endblock %} 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- AOS Library for Animations -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #5a9;
+            --secondary-color: #333;
+            --background-color: #87bcf1;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+        }
+
+        .navbar {
+            transition: background-color 0.3s;
+        }
+
+        .navbar.shrink {
+            background-color: var(--primary-color) !important;
+        }
+
+        .hero-section {
+            background: url('https://cdn.pixabay.com/photo/2020/03/14/05/38/screw-4929711_960_720.jpg') no-repeat center center/cover;
+            color: rgb(52, 243, 5);
+            text-align: center;
+            padding: 120px 15px;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .bg-orange {
+  background-color: #fc6321; /* or any other orange shade you prefer */
+}
+bg-green {
+    background-color:rgb(151, 246, 127); /* or any other orange shade you prefer */
+  }
+        #featured-tools {
+            background-color:#1c34e8cc;
+        }
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            font-size: 18px;
+        }
+
+        .alert {
+          padding: 15px;
+          margin-bottom: 20px;
+          border: 1px solid transparent;
+          border-radius: 4px;
+        }
+        
+        .alert-success {
+          color: #155724;
+          background-color: #d4edda;
+          border-color: #c3e6cb;
+        }
+        
+        .alert-danger {
+          color: #721c24;
+          background-color: #f8d7da;
+          border-color: #f5c6cb;
+        }
+        
+        
+    /* Floating Chatbot Icon */
+    #chatbot-icon {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #007bff;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    /* Chatbot Window */
+    #chatbox {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background: white;
+      display: none; /* Initially hidden */
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    /* Chatbot Header */
+    #chat-header {
+      background: #007bff;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+  
+    /* Chat Body */
+    #chat-body {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+  
+    /* Chat Input */
+    #chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+  
+    #chat-input input {
+      flex-grow: 1;
+      padding: 8px;
+      border: none;
+    }
+  
+    #chat-input button {
+      padding: 8px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  
+    {% block extra_css %}{% endblock %}
+      
+
+
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">RentalHub</a>
+
+            <form method="GET" action="#" class="d-flex" role="search">
+              {% csrf_token %}
+              <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success text-dark" type="submit">Search</button>
+            </form>
+      
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url "index" %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "about" %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "contact" %}">Contact</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                    <form action="{% url "account_logout" %} " method="post">
+                      {% csrf_token %}
+                      <button class="btn btn-danger" type='submit'>Logout </button> ({{user.username}})
+              
+                    </form>
+                    {% else %}
+                    <a href="{% url "account_login" %}" class="btn btn-success mx-4"> Login</a>
+                   
+                    
+              
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% block content %}
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <h1>Welcome to RentalHub</h1>
+      <p>Your one-stop solution for renting anything you need</p>
+      <a href="#categories" class="btn btn-primary">Explore Now</a>
+    </div>
+  </section>
+
+  {% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} mt-3">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+  <!-- Categories Section -->
+  <section id="categories" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Categories</h2>
+      <div class="row g-4">
+        {% for category in categories %}
+          <div class="col-md-4" data-aos="fade-up">
+            <a href="{% url 'category_listing' category.id %}" class="text-dark" >
+            <div class="card bg-orange">
+              <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="{{ category.name }}">
+
+              <div class="card-body">
+                <h5 class="card-title">{{ category.name }}</h5>
+                <p class="card-text">{{ category.description }}</p>
+              </div>
+            </div>
+        </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Tools Section -->
+  <section id="featured-tools" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Featured Tools</h2>
+      <div id="toolsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          {% for tool in featured_tools %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="row justify-content-center">
+                <div class="col-md-4">
+                  <img src="https://via.placeholder.com/300x200" class="d-block w-100" alt="{{ tool.name }}">
+                  <h5 class="text-center">{{ tool.name }}</h5>
+                  <p class="text-center">${{ tool.price }}/day</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#toolsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#toolsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}
+
+{% comment %}     
+  <div id="chatbox">
+    <div id="chat-header">Rental Assistant 🤖</div>
+    <div id="chat-body"></div>
+    <div id="chat-input">
+      <input type="text" id="userMessage" placeholder="Ask something..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  
+  <script>
+    function sendMessage() {
+      const userInput = document.getElementById("userMessage").value;
+      if (!userInput.trim()) return;
+  
+      const chatBody = document.getElementById("chat-body");
+      chatBody.innerHTML += `<div><b>You:</b> ${userInput}</div>`;
+  
+      fetch("/chatbot/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userInput }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          chatBody.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
+          chatBody.scrollTop = chatBody.scrollHeight;
+        });
+  
+      document.getElementById("userMessage").value = "";
+    }
+  </script>
+   {% endcomment %}
+
+
+  <!-- Floating Chatbot Icon -->
+  <div id="chatbot-icon" onclick="toggleChat()">
+    💬
+  </div>
+  
+  <!-- Chatbot Window -->
+  <div id="chatbox">
+    <div id="chat-header">Rental Assistant 🤖</div>
+    <div id="chat-body"></div>
+    <div id="chat-input">
+      <input type="text" id="userMessage" placeholder="Ask something..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  
+  <script>
+    function toggleChat() {
+      var chatbox = document.getElementById("chatbox");
+      chatbox.style.display = chatbox.style.display === "none" ? "flex" : "none";
+    }
+  
+    function sendMessage() {
+      const userInput = document.getElementById("userMessage").value;
+      if (!userInput.trim()) return;
+  
+      const chatBody = document.getElementById("chat-body");
+      chatBody.innerHTML += `<div><b>You:</b> ${userInput}</div>`;
+  
+      // Clear input field after sending
+      document.getElementById("userMessage").value = "";
+  
+      // Display "bot is typing" temporarily
+      chatBody.innerHTML += `<div><b>Bot:</b> Typing...</div>`;
+      chatBody.scrollTop = chatBody.scrollHeight;
+  
+      // Send request to Django backend
+      fetch("/core/chatbot/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userInput }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Check if there's an error message
+          if (data.error) {
+            chatBody.innerHTML += `<div><b>Bot:</b> Sorry, something went wrong. Please try again later.</div>`;
+          } else {
+            chatBody.innerHTML += `<div><b>Bot:</b> ${data.reply}</div>`;
+          }
+          chatBody.scrollTop = chatBody.scrollHeight;
+        })
+        .catch((error) => {
+          chatBody.innerHTML += `<div><b>Bot:</b> Sorry, something went wrong. Please try again later.</div>`;
+          chatBody.scrollTop = chatBody.scrollHeight;
+        });
+    }
+  </script>
+  
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Phone: 123-456-7890</p>
+                    <p>Email: khotshubham393@gmail.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="{% url "about" %}">About</a></li>
+                        <li><a href="{% url "contact" %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="me-2"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="me-2"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTopBtn"><i class="bi bi-arrow-up"></i></button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollToTopBtn.style.display = 'block';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Shrinking Header
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shrink');
+            } else {
+                navbar.classList.remove('shrink');
+            }
+        });
+    </script>
+</body>
+</html>

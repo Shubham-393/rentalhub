@@ -1,0 +1,124 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<br><br><br><hr><br>
+<div class="container">
+  <div class="row">
+    <!-- Tool Details -->
+    <div class="col-md-6">
+      <div class="card bg-success text-white mb-3">
+        <div class="card-body">
+          <h1 class="card-title font-weight-bold">{{ tool.name }}</h1>
+          <p class="card-text">{{ tool.description }}</p>
+          <p class="card-text">Category: {{ tool.category.name }}</p>
+          <p class="card-text">Daily Rental Price: ${{ tool.daily_rental_price }}</p>
+          <p class="card-text">Condition: {{ tool.condition }}</p>
+          <p class="card-text" 
+             class="{% if not tool.availability_status %}text-danger{% else %}text-white{% endif %}">
+            Availability: 
+            {% if tool.availability_status %}Available{% else %}Not Available{% endif %}
+          </p>
+          <p class="card-text">Owner: {{ tool.owner.username }}</p>
+          <p class="card-text">Created At: {{ tool.created_at }}</p>
+          <p class="card-text">Updated At: {{ tool.updated_at }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="col-md-6">
+      <div class="card bg-info text-white mb-3">
+        <div class="card-body">
+          <h2 class="card-title font-weight-bold">Reviews</h2>
+          {% if reviews %}
+          <ul class="list-group list-group-flush">
+            {% for review in reviews %}
+              <li class="list-group-item">
+                <p>{{ review.comment }} ({{ review.rating }})</p>
+                <p>By {{ review.user.username }} on {{ review.created_at }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+          <p class="card-text">Average Rating: {{ average_rating }}</p>
+          {% else %}
+          <p>No reviews yet. Be the first to review!</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Form -->
+  <div class="text-center">
+    <form  method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="rental_start_date">Rental Start Date:</label>
+        <input 
+          type="date" 
+          name="rental_start_date" 
+          id="rental_start_date" 
+          class="form-control mb-2" 
+          required>
+      </div>
+      <div class="form-group">
+        <label for="rental_end_date">Rental End Date:</label>
+        <input 
+          type="date" 
+          name="rental_end_date" 
+          id="rental_end_date" 
+          class="form-control mb-2" 
+          required>
+      </div>
+      <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" class="form-control mb-2" required>
+        </div>
+
+      <br><hr>
+      <input type="hidden" name="total_price" id="total_price" value="0">
+      <button type="submit" class="btn btn-primary btn-lg">Book</button>
+    </form>
+  </div>
+<hr>
+  <!-- Total Price -->
+  <div class="text-center mt-3" id="total-price-container">
+    <h3>Total Price: $0</h3>
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+  const rentalStartDateInput = document.getElementById('rental_start_date');
+  const rentalEndDateInput = document.getElementById('rental_end_date');
+  const totalPriceInput = document.getElementById('total_price');
+  const totalPriceContainer = document.getElementById('total-price-container');
+
+  function calculatePrice() {
+    const rentalStartDate = new Date(rentalStartDateInput.value);
+    const rentalEndDate = new Date(rentalEndDateInput.value);
+
+    // Check if both dates are valid
+    if (!isNaN(rentalStartDate) && !isNaN(rentalEndDate)) {
+      const days = Math.ceil((rentalEndDate - rentalStartDate) / (1000 * 60 * 60 * 24));
+      
+      if (days > 0) {
+        const totalPrice = days * {{ tool.daily_rental_price }};
+        totalPriceInput.value = totalPrice.toFixed(2);
+        totalPriceContainer.innerHTML = `<h3>Total Price: $${totalPrice.toFixed(2)}</h3>`;
+      } else {
+        totalPriceContainer.innerHTML = `<h3 class="text-danger">End date must be after start date.</h3>`;
+        totalPriceInput.value = 0;
+      }
+    } else {
+      totalPriceContainer.innerHTML = `<h3>Total Price: $0</h3>`;
+      totalPriceInput.value = 0;
+    }
+  }
+
+  rentalStartDateInput.addEventListener('change', calculatePrice);
+  rentalEndDateInput.addEventListener('change', calculatePrice);
+</script>
+
+<hr><br>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<section class="py-5" style="background-color:rgb(132, 92, 243);">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4">About RentalHub</h2>
+            <p class="lead text-muted">Your Trusted Partner in Tool and Equipment Rentals</p>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="{% static 'images/about.png' %}" 
+                     alt="About Us" 
+                     class="img-fluid rounded-3 mb-3" 
+                     style="box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            </div>
+            <div class="col-md-6">
+                <div class="card card-lg">
+                    <div class="card-body">
+                        <h3 class="card-title">Our Story</h3>
+                        <p class="card-text text-muted">
+                            RentalHub is a revolutionary marketplace designed to make equipment rental simple, 
+                            efficient, and accessible to everyone. Founded by a passionate maker and problem-solver, 
+                            RentalHub aims to connect equipment owners with those who need them, promoting sustainability 
+                            and reducing waste.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-5">
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="card h-100 border-0">
+                    <div class="card-body text-center">
+                        <i class="bi bi-lightning-charge display-4 text-primary"></i>
+                        <h3 class="card-title mb-3">Instant Availability</h3>
+                        <p class="card-text text-muted">Find and rent equipment in minutes</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 border-0">
+                    <div class="card-body text-center">
+                        <i class="bi bi-shield-check display-4 text-primary"></i>
+                        <h3 class="card-title mb-3">Secure Transactions</h3>
+                        <p class="card-text text-muted">Safe and secure payment processing</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 border-0">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people display-4 text-primary"></i>
+                        <h3 class="card-title mb-3">Community First</h3>
+                        <p class="card-text text-muted">Building a trusted community of renters and owners</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <h3>Why Choose Us?</h3>
+                <p class="lead">We're committed to making equipment rental easy, affordable, and sustainable.</p>
+            </div>
+            <div class="col-md-8">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card bg-transparent border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Wide Range of Equipment</h5>
+                                <p class="card-text">Access thousands of tools and equipment across various categories</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-transparent border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Flexible Rental Options</h5>
+                                <p class="card-text">Rent by the day, week, or month - you decide</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

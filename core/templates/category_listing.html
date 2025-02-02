@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block content %}<br><br><hr><br>
+  <div class="container">
+    <h1>{{ category.name }}</h1>
+    <div class="row">
+        <br><hr><br>
+      {% for tool in tools %}
+        <div class="col-md-4 ">
+          <div class="card bg-orange text-dark">
+            <img src="https://via.placeholder.com/200x150" class="card-img-top" alt="{{ tool.name }}">
+            <div class="card-body">
+              <h5 class="card-title font-weight-bold">{{ tool.name }}</h5>
+              <p class="card-text font-weight-bold">{{ tool.description }}</p>
+              <p class="card-text font-weight-bold">Price: ${{ tool.daily_rental_price }}/day</p>
+              <a href="{% url 'book_tool' tool.id %}" class="btn btn-primary">Book</a> 
+              <a href="{% url 'tool_details' tool.id %}" class="text-dark"><b>details</b></a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+<br><br><hr><br>
+{% endblock %}
+

@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4">Get in Touch <a href="https://www.linkedin.com/in/shubham-khot-224979256?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-muted text-decoration-none"><i class="bi bi-linkedin fs-4"></i></a> </h2>
+            <p class="lead text-muted">We'd love to hear from you!</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card card-lg">
+                    <div class="card-body">
+                        <h3 class="card-title">Send Us a Message</h3>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Your Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Your Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-lg">
+                    <div class="card-body">
+                        <h3 class="card-title">Contact Information</h3>
+                        <div class="mb-3">
+                            <h5 class="card-title">Address</h5>
+                            <p class="card-text text-muted">123 RentalHub Street<br>Pune, NY 10001</p>
+                        </div>
+                        <div class="mb-3">
+                            <h5 class="card-title">Phone</h5>
+                            <p class="card-text text-muted">+1 (234) 567-8901</p>
+                        </div>
+                        <div class="mb-3">
+                            <h5 class="card-title">Email</h5>
+                            <p class="card-text text-muted">khotshubham393@gmail.com</p>
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="card-title">Follow Us</h5>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="text-muted text-decoration-none"><i class="bi bi-facebook fs-4"></i></a>
+                                <a href="#" class="text-muted text-decoration-none"><i class="bi bi-twitter fs-4"></i></a>
+                                <a href="#" class="text-muted text-decoration-none"><i class="bi bi-instagram fs-4"></i></a>
+                                <a href="https://www.linkedin.com/in/shubham-khot-224979256?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-muted text-decoration-none"><i class="bi bi-linkedin fs-4"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

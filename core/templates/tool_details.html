@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<br><br><br><hr><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card bg-success text-white mb-3">
+          <div class="card-body">
+            <h1 class="card-title font-weight-bold"><b>{{ tool.name }}</b></h1>
+            <p class="card-text">{{ tool.description }}</p>
+            <p class="card-text"><u>Category</u>: {{ tool.category.name }}</p>
+            <p class="card-text"><u>Daily Rental Price</u>: ${{ tool.daily_rental_price }}</p>
+            <p class="card-text"><u>Condition</u>: {{ tool.condition }}</p>
+            <p class="card-text" {% if not tool.availability_status %}style="color: red"{% endif %}><u>Availability</u>: {% if tool.availability_status %} Available{% else %}Not Available{% endif %}</p>
+            <p class="card-text"><u>Owner</u>: {{ tool.owner.username }}</p>
+            <p class="card-text"><u>Created At</u>: {{ tool.created_at }}</p>
+            <p class="card-text"><u>Updated At</u>: {{ tool.updated_at }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card bg-info text-white mb-3">
+          <div class="card-body">
+            <h2 class="card-title font-weight-bold"><b>Reviews</b></h2>
+            <ul class="list-group list-group-flush">
+              {% for review in reviews %}
+                <li class="list-group-item">
+                  <p>{{ review.comment }} ({{ review.rating }})</p>
+                  <p><u>By</u> {{ review.user.username }} on {{ review.created_at }}</p>
+                </li>
+              {% endfor %}
+            </ul>
+            <p class="card-text"><u>Average Rating</u>: {{ average_rating }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<br><hr><br>
+  <div class="text-center">
+    <a href="{% url 'book_tool' tool.id %}" class="btn btn-primary btn-lg">Book</a>
+  </div>
+  <br><hr><br>
+{% endblock %}
