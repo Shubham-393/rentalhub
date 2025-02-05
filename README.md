@@ -135,13 +135,17 @@ rentalhub/
 
 Contributions are welcome! Follow these steps to contribute:
 
-Fork the Repository.
-Create a New Branch:
-`git checkout -b feature-branch-name`
-Commit Your Changes:
-`git commit -m 'Add new feature'`
-Push to GitHub:
-`git push origin feature-branch-name`
+Fork the Repository.  
+
+Create a New Branch:  
+`git checkout -b feature-branch-name`  
+
+Commit Your Changes:  
+`git commit -m 'Add new feature'`  
+
+Push to GitHub:  
+`git push origin feature-branch-name`  
+
 Create a Pull Request.
 
 ---
