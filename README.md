@@ -24,7 +24,7 @@ RentalHub is a **Django-based** online rental platform that allows users to rent
 
 ### 📌 Frontend:
 - **HTML5**
-- **CSS3**
+- **CSS3 (Bootstrap 5)** 
 - **JavaScript**
 
 ### 📌 Backend:
@@ -59,8 +59,8 @@ Follow these steps to **set up RentalHub locally**:
 
 ### 2️⃣ Create and Activate Virtual Environment
 
-`python3 -m venv env`
-`source env/bin/activate  # On Windows: env\Scripts\activate`
+`python3 -m venv .venv`
+`source .venv/bin/activate  # On Windows: .venv\Scripts\activate`
 
 ### 3️⃣ Install Dependencies
 
