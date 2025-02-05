@@ -101,17 +101,17 @@ Your project is now running at:
 
 ## 📖 Usage Guide
 
-✅ **Login/Register** – Use Google Authentication to sign in.
-✅ **Browse Tools** – Explore rental options using the search bar.
-✅ **Ask AI Chatbot** – Get assistance with tool selection.
-✅ **Book and Pay** – Select tools, choose rental dates, and pay via Razorpay.
-✅ **Email Confirmation** – Receive instant email confirmation after booking.
+✅ **Login/Register** – Use Google Authentication to sign in.  
+✅ **Browse Tools** – Explore rental options using the search bar.    
+✅ **Ask AI Chatbot** – Get assistance with tool selection.  
+✅ **Book and Pay** – Select tools, choose rental dates, and pay via Razorpay.  
+✅ **Email Confirmation** – Receive instant email confirmation after booking.  
 
 ---
 
 ## 📊 Project Structure
 
-`
+```
 rentalhub/
 │── core/               # Main app
 │   ├── models.py       # Database models
@@ -127,7 +127,7 @@ rentalhub/
 │── requirements.txt    # Dependencies
 │── manage.py           # Django management script
 │── README.md           # Project documentation
-`
+```
 
 ---
 
@@ -155,8 +155,8 @@ This project is licensed under the MIT License.
 ## 📞 Contact
 
 If you have any questions, feel free to reach out:
-📧 **Email**: khotshubham393@gmail.com
-🔗 **GitHub**: Shubham-393
+📧 **Email**: khotshubham393@gmail.com  
+🔗 **GitHub**: [Shubham-393](https://github.com/Shubham-393)
 
 ✨ Enjoy using RentalHub! Happy Renting! 🚀
 
