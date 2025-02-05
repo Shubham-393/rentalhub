@@ -53,21 +53,24 @@ RentalHub is a **Django-based** online rental platform that allows users to rent
 Follow these steps to **set up RentalHub locally**:
 
 ### 1️⃣ Clone the Repository
-`
-git clone https://github.com/Shubham-393/rentalhub.git
-cd rentalhub`
+
+`git clone https://github.com/Shubham-393/rentalhub.git`
+`cd rentalhub`
 
 ### 2️⃣ Create and Activate Virtual Environment
 
-`python3 -m venv env
-source env/bin/activate  # On Windows: env\Scripts\activate`
+`python3 -m venv env`
+`source env/bin/activate  # On Windows: env\Scripts\activate`
+
 ### 3️⃣ Install Dependencies
 
 `pip install -r requirements.txt`
-### 4️⃣ Set Up Environment Variables
-Create a .env file and add the following details:
 
-` DEBUG=True
+### 4️⃣ Set Up Environment Variables
+
+Create a .env file and add the following details:
+```
+DEBUG=True
 SECRET_KEY=your_secret_key
 ALLOWED_HOSTS=localhost,127.0.0.1
 DATABASE_URL=sqlite:///db.sqlite3
@@ -81,23 +84,33 @@ RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 EMAIL_HOST=smtp.your-email-provider.com
 EMAIL_PORT=587
 EMAIL_HOST_USER=your_email@example.com
-EMAIL_HOST_PASSWORD=your_email_password `
-5️⃣ Apply Migrations
+EMAIL_HOST_PASSWORD=your_email_password
+```
+
+### 5️⃣ Apply Migrations
 
 `python manage.py migrate`
-6️⃣ Run the Development Server
+
+### 6️⃣ Run the Development Server
 
 `python manage.py runserver`
 Your project is now running at:
 🔗 http://127.0.0.1:8000/
 
-### 📖 Usage Guide
+---
+
+## 📖 Usage Guide
+
 ✅ **Login/Register** – Use Google Authentication to sign in.
 ✅ **Browse Tools** – Explore rental options using the search bar.
 ✅ **Ask AI Chatbot** – Get assistance with tool selection.
 ✅ **Book and Pay** – Select tools, choose rental dates, and pay via Razorpay.
 ✅ **Email Confirmation** – Receive instant email confirmation after booking.
-### 📊 Project Structure
+
+---
+
+## 📊 Project Structure
+
 `
 rentalhub/
 │── core/               # Main app
@@ -115,24 +128,32 @@ rentalhub/
 │── manage.py           # Django management script
 │── README.md           # Project documentation
 `
-### 🤝 Contributing
+
+---
+
+## 🤝 Contributing
+
 Contributions are welcome! Follow these steps to contribute:
 
 Fork the Repository.
 Create a New Branch:
-`
-git checkout -b feature-branch-name`
+`git checkout -b feature-branch-name`
 Commit Your Changes:
-`
-git commit -m 'Add new feature'`
+`git commit -m 'Add new feature'`
 Push to GitHub:
-`
-git push origin feature-branch-name`
+`git push origin feature-branch-name`
 Create a Pull Request.
-### 📜 License
+
+---
+
+## 📜 License
+
 This project is licensed under the MIT License.
 
-### 📞 Contact
+---
+
+## 📞 Contact
+
 If you have any questions, feel free to reach out:
 📧 **Email**: khotshubham393@gmail.com
 🔗 **GitHub**: Shubham-393
